@@ -8,8 +8,71 @@ player.
 stores resume progress in `~/.local/state/cwatch/watch_later` and shows `resume`
 timestamps in the library.
 
-Supported video extensions: `.mp4`, `.mkv`, `.webm`, `.avi`, `.mov`, `.m4v`,
-`.flv`, `.wmv`, and `.ogv`.
+## Dependencies
+
+- C compiler
+- `make`
+- `pkg-config`
+- SDL2
+- SDL2_ttf
+- `mpv` for playback and resume support
+- `ffmpeg` for thumbnails
+
+If `mpv` is not installed, `cwatch` tries other players in this order:
+`vlc`, `celluloid`, `parole`, then `xdg-open`.
+
+Examples:
+
+- Arch Linux / Artix Linux: `sudo pacman -S --needed git base-devel pkgconf sdl2 sdl2_ttf mpv ffmpeg`
+- Debian / Ubuntu: `sudo apt install git build-essential pkg-config libsdl2-dev libsdl2-ttf-dev mpv ffmpeg`
+- Fedora: `sudo dnf install git gcc make pkgconf-pkg-config SDL2-devel SDL2_ttf-devel mpv ffmpeg`
+- openSUSE: `sudo zypper install git gcc make pkg-config libSDL2-devel SDL2_ttf-devel mpv ffmpeg`
+- Gentoo: `sudo emerge --ask dev-vcs/git sys-devel/gcc sys-devel/make virtual/pkgconfig media-libs/libsdl2 media-libs/sdl2-ttf media-video/mpv media-video/ffmpeg`
+- Alpine: `sudo apk add git build-base pkgconf sdl2-dev sdl2_ttf-dev mpv ffmpeg`
+
+## Full Install Example
+
+Minimal install:
+
+```sh
+git clone https://github.com/Vifuddyxg/cwatch
+cd cwatch
+make
+sudo make install-desktop
+```
+
+`install-desktop` installs:
+
+- `cwatch` to `/usr/local/bin`
+- `cwatch.desktop` to `/usr/local/share/applications`
+
+If you only want the binary and do not need an application launcher:
+
+```sh
+sudo make install
+```
+
+Run after installing:
+
+```sh
+cwatch
+cwatch /path/to/media
+```
+
+Run without installing:
+
+```sh
+./cwatch
+./cwatch /path/to/media
+```
+
+If you installed the desktop entry, `cwatch` should appear in application
+launchers that support desktop files:
+
+```sh
+rofi -show drun
+wofi --show drun
+```
 
 ## Features
 
@@ -19,6 +82,9 @@ Supported video extensions: `.mp4`, `.mkv`, `.webm`, `.avi`, `.mov`, `.m4v`,
 - Saves resume positions when using `mpv`
 - Lets you pin folders and mark videos as watched
 - Generates thumbnails with `ffmpeg` when available
+
+Supported video extensions: `.mp4`, `.mkv`, `.webm`, `.avi`, `.mov`, `.m4v`,
+`.flv`, `.wmv`, and `.ogv`.
 
 ## Layout
 
@@ -34,67 +100,6 @@ Supported video extensions: `.mp4`, `.mkv`, `.webm`, `.avi`, `.mov`, `.m4v`,
 
 Nested folders are supported. Videos are grouped by their directory path.
 Files directly in `~/media` appear in `Videos`.
-
-## Dependencies
-
-Build dependencies:
-
-- C compiler
-- `make`
-- `pkg-config`
-- SDL2
-- SDL2_ttf
-
-Runtime dependencies:
-
-- One supported external player: `mpv` is recommended
-- `ffmpeg` for thumbnails, optional
-
-## Build
-
-```sh
-make
-```
-
-## Install
-
-```sh
-sudo make install
-```
-
-Install the desktop launcher for application menus and `drun` launchers:
-
-```sh
-sudo make install-desktop
-```
-
-## Run
-
-```sh
-./cwatch
-./cwatch /path/to/media
-```
-
-After installing:
-
-```sh
-cwatch
-cwatch /path/to/media
-```
-
-## App launchers
-
-`sudo make install-desktop` installs `cwatch.desktop` into
-`/usr/local/share/applications`. Launchers that support desktop entries, such as
-`rofi -show drun`, `wofi --show drun`, or an application menu can then find
-`cwatch`.
-
-```sh
-rofi -show drun
-```
-
-If your launcher does not show `cwatch` immediately, refresh its desktop-entry
-cache or restart the launcher.
 
 ## Controls
 
