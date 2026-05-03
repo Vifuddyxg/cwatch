@@ -1,0 +1,9 @@
+[Desktop Entry]
+Type=Application
+Name=cwatch
+Comment=Local video library
+Exec=cwatch
+Terminal=false
+Categories=AudioVideo;Video;Player;
+Keywords=video;library;media;mp4;series;movies;
+StartupNotify=true

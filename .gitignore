@@ -1,0 +1,5 @@
+build/
+cwatch
+.cache/
+*.o
+*.bmp
